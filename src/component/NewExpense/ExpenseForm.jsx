@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 const ExpenseForm = () => {
-  const [inputTitle, setInputTitle] = useState("");
-  const [inputAmount, setInputAmount] = useState("");
-  const [inputDate, setInputDate] = useState("");
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
 
   // const [userInput, setUserInput] = useState({
   //   enteredTitle: "",
@@ -12,7 +12,7 @@ const ExpenseForm = () => {
   // });
 
   const titlechangeHandler = (e) => {
-    setInputTitle(e.target.value);
+    setEnteredTitle(e.target.value);
     //setUserInput({...userInput,enteredTitle:e.target.value}); -->worng way to update state
     //correct way to update the state
     // setUserInput((prevState) => {
@@ -23,14 +23,23 @@ const ExpenseForm = () => {
     // });
   };
   const amountchangeHandler = (e) => {
-    setInputAmount(e.target.value);
+    setEnteredAmount(e.target.value);
   };
   const datechangeHandler = (e) => {
-    setInputDate(e.target.value);
+    setEnteredDate(e.target.value);
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const expenseData = {
+      title: enteredTitle,
+      amount: +enteredAmount,
+      date: new Date(enteredDate),
+    };
+    console.log(expenseData);
   };
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
